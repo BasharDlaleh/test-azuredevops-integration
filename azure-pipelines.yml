@@ -9,8 +9,13 @@ trigger:
 pool:
   vmImage: ubuntu-latest
     
-
 steps:
 - script: |
     cat file1.txt
   displayName: 'show file1 content from GitHub repo'
+
+- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'snyk'
+    testType: 'code'
+    failOnIssues: true
